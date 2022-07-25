@@ -130,4 +130,3 @@ sudo systemctl restart suid
 ```
 sudo systemctl stop suid
 ```
-
