@@ -18,21 +18,22 @@ Node kurduktan sonra sonda söyleyeceğim işlemleri yapmayı unutmayın!!
 screen -S sui
 ```
 
-# Full nodeumuzu yükleyelim:
+
+# Kurulum:
 ```
 wget -O sui.sh https://raw.githubusercontent.com/kj89/testnet_manuals/main/sui/sui.sh && chmod +x sui.sh && ./sui.sh
 ```
 
-# Node başarılı çalıştıktan sonra karşınıza şu şekilde bir görsel çıkacak:
-
-![image](https://user-images.githubusercontent.com/101149671/178935325-ba533e58-5cfa-4d9d-81f2-d7d595009b3b.png)
-
-# Logları kontrol:
+# Güncelleme: 
 ```
-docker logs -f sui-fullnode-1 --tail 50
+wget -qO update.sh https://raw.githubusercontent.com/kj89/testnet_manuals/main/sui/tools/update.sh && chmod +x update.sh && ./update.sh
 ```
 
-![image](https://user-images.githubusercontent.com/101149671/178935450-5928a3f9-e493-49f7-b235-913a56e7abc7.png)
+# Logları kontrol ve işlem bu kadar
+```
+journalctl -u suid -f -o cat
+```
+
 
 # Şimdi Sui Wallet'ı kullanacağız.
 
@@ -73,39 +74,6 @@ Not: #pick-a-role role kanalından da rol alabilirsiniz isterseniz emojilere tı
 journalctl -u suid -f -o cat
 ```
 
-## Sui-Devnet-0.6.1-Guncelleme
-
-Sunucumuza bağlanıyoruz ve sırasıyla şu komutları giriyoruz;
-
-1.Komut
-
-```
-cd sui && rm -rf genesis.blob
-```
-2.Komut
-```
-wget -qO genesis.blob https://github.com/MystenLabs/sui-genesis/raw/main/devnet/genesis.blob
-```
-3.Komut
-```
-sed -i 's/stable/main/' docker-compose.yaml
-```
-4.Komut
-```
-sed -i 's/127.0.0.1/0.0.0.0/' fullnode-template.yaml
-```
-5.Komut
-```
-docker-compose down --volumes
-```
-6.Komut
-```
-docker-compose up -d
-```
-Son olarak Log kontrol ediyoruz;
-```
-docker logs -f sui-fullnode-1 --tail 50
-```
 
 # Node silmek için:
 ```
@@ -130,3 +98,8 @@ sudo systemctl restart suid
 ```
 sudo systemctl stop suid
 ```
+
+
+
+
+
